@@ -1,0 +1,130 @@
+Instruments (instr#:[bank#, patch#] name):
+0:[0, 0] Acoustic Grand Piano
+1:[0, 1] Bright Acoustic Pian
+2:[0, 2] Electric Grand Piano
+3:[0, 3] Honky-tonk Piano
+4:[0, 4] Electric Piano 1
+5:[0, 5] Electric Piano 2
+6:[0, 6] Harpsichord
+7:[0, 7] Clavi
+8:[0, 8] Celesta
+9:[0, 9] Glockenspiel
+10:[0, 10] Music Box
+11:[0, 11] Vibraphone
+12:[0, 12] Marimba
+13:[0, 13] Xylophone
+14:[0, 14] Tubular Bells
+15:[0, 15] Dulcimer
+16:[0, 16] Drawbar Organ
+17:[0, 17] Percussive Organ
+18:[0, 18] Rock Organ
+19:[0, 19] Church Organ
+20:[0, 20] Reed Organ
+21:[0, 21] Accordion
+22:[0, 22] Harmonica
+23:[0, 23] Tango Accordion
+24:[0, 24] Acoustic Guitar (nyl
+25:[0, 25] Acoustic Guitar (ste
+26:[0, 26] Electric Guitar (jaz
+27:[0, 27] Electric Guitar (cle
+28:[0, 28] Electric Guitar (mut
+29:[0, 29] Overdriven Guitar
+30:[0, 30] Distortion Guitar
+31:[0, 31] Guitar harmonics
+32:[0, 32] Acoustic Bass
+33:[0, 33] Electric Bass (finge
+34:[0, 34] Electric Bass (pick)
+35:[0, 35] Fretless Bass
+36:[0, 36] Slap Bass 1
+37:[0, 37] Slap Bass 2
+38:[0, 38] Synth Bass 1
+39:[0, 39] Synth Bass 2
+40:[0, 40] Violin
+41:[0, 41] Viola
+42:[0, 42] Cello
+43:[0, 43] Contrabass
+44:[0, 44] Tremolo Strings
+45:[0, 45] Pizzicato Strings
+46:[0, 46] Orchestral Harp
+47:[0, 47] Timpani
+48:[0, 48] String Ensemble 1
+49:[0, 49] String Ensemble 2
+50:[0, 50] SynthStrings 1
+51:[0, 51] SynthStrings 2
+52:[0, 52] Choir Aahs
+53:[0, 53] Voice Oohs
+54:[0, 54] Synth Voice
+55:[0, 55] Orchestra Hit
+56:[0, 56] Trumpet
+57:[0, 57] Trombone
+58:[0, 58] Tuba
+59:[0, 59] Muted Trumpet
+60:[0, 60] French Horn
+61:[0, 61] Brass Section
+62:[0, 62] SynthBrass 1
+63:[0, 63] SynthBrass 2
+64:[0, 64] Soprano Sax
+65:[0, 65] Alto Sax
+66:[0, 66] Tenor Sax
+67:[0, 67] Baritone Sax
+68:[0, 68] Oboe
+69:[0, 69] English Horn
+70:[0, 70] Bassoon
+71:[0, 71] Clarinet
+72:[0, 72] Piccolo
+73:[0, 73] Flute
+74:[0, 74] Recorder
+75:[0, 75] Pan Flute
+76:[0, 76] Blown Bottle
+77:[0, 77] Shakuhachi
+78:[0, 78] Whistle
+79:[0, 79] Ocarina
+80:[0, 80] Lead 1 (square)
+81:[0, 81] Lead 2 (sawtooth)
+82:[0, 82] Lead 3 (calliope)
+83:[0, 83] Lead 4 (chiff)
+84:[0, 84] Lead 5 (charang)
+85:[0, 85] Lead 6 (voice)
+86:[0, 86] Lead 7 (fifths)
+87:[0, 87] Lead 8 (bass + lead)
+88:[0, 88] Pad 1 (new age)
+89:[0, 89] Pad 2 (warm)
+90:[0, 90] Pad 3 (polysynth)
+91:[0, 91] Pad 4 (choir)
+92:[0, 92] Pad 5 (bowed)
+93:[0, 93] Pad 6 (metallic)
+94:[0, 94] Pad 7 (halo)
+95:[0, 95] Pad 8 (sweep)
+96:[0, 96] FX 1 (rain)
+97:[0, 97] FX 2 (soundtrack)
+98:[0, 98] FX 3 (crystal)
+99:[0, 99] FX 4 (atmosphere)
+100:[0, 100] FX 5 (brightness)
+101:[0, 101] FX 6 (goblins)
+102:[0, 102] FX 7 (echoes)
+103:[0, 103] FX 8 (sci-fi)
+104:[0, 104] Sitar
+105:[0, 105] Banjo
+106:[0, 106] Shamisen
+107:[0, 107] Koto
+108:[0, 108] Kalimba
+109:[0, 109] Bag pipe
+110:[0, 110] Fiddle
+111:[0, 111] Shanai
+112:[0, 112] Tinkle Bell
+113:[0, 113] Agogo
+114:[0, 114] Steel Drums
+115:[0, 115] Woodblock
+116:[0, 116] Taiko Drum
+117:[0, 117] Melodic Tom
+118:[0, 118] Synth Drum
+119:[0, 119] Reverse Cymbal
+120:[0, 120] Guitar Fret Noise
+121:[0, 121] Breath Noise
+122:[0, 122] Seashore
+123:[0, 123] Bird Tweet
+124:[0, 124] Telephone Ring
+125:[0, 125] Helicopter
+126:[0, 126] Applause
+127:[0, 127] Gunshot
+128:[0, 0] Standard Kit
