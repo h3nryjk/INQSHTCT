@@ -52,6 +52,6 @@ public class Button extends GUIComponent {
 		g.setColor(new Color(255, 255, 255));
 		
 		FontMetrics metrics = g.getFontMetrics();
-		g.drawString(label, x+width/2-metrics.stringWidth(label)/2, y+(height/2));
+		g.drawString(label, x+width/2-metrics.stringWidth(label)/2, y+metrics.getHeight()+(metrics.getHeight()-height/2));
 	}
 }

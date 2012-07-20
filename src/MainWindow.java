@@ -27,6 +27,7 @@ import graphics.Fretboard;
 import gui.Button;
 import gui.GUIListener;
 import gui.GUIManager;
+import gui.TextBox;
 
 
 public class MainWindow extends Game {
@@ -34,6 +35,7 @@ public class MainWindow extends Game {
 	
 	private GUIManager gui;
 	private Button btnTest;
+	private TextBox txtTest;
 	
 	private Finger[] fingers;
 	private Fretboard fretboard;
@@ -68,6 +70,10 @@ public class MainWindow extends Game {
 			}
 		});
 		gui.add(btnTest);
+		txtTest = new TextBox();
+		txtTest.setBounds(0, 100, 100, 25);
+		txtTest.setLimit(10);
+		gui.add(txtTest);
 		
 		fingers = new Finger[4];
 		for(int i=0; i<fingers.length; i++) {
@@ -118,7 +124,7 @@ public class MainWindow extends Game {
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
-		
+		gui.handle(arg0);
 	}
 
 	@Override
