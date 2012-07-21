@@ -22,6 +22,7 @@ import javax.sound.midi.Synthesizer;
 import sprite.Sprite;
 
 import game.Game;
+import graphics.ChordButtonHandler;
 import graphics.Finger;
 import graphics.Fretboard;
 import gui.Button;
@@ -34,8 +35,8 @@ public class MainWindow extends Game {
 	private static final long serialVersionUID = 1L;
 	
 	private GUIManager gui;
-	private Button btnTest;
-	private TextBox txtTest;
+	
+	private ChordButtonHandler chords;
 	
 	private Finger[] fingers;
 	private Fretboard fretboard;
@@ -43,6 +44,8 @@ public class MainWindow extends Game {
 	private boolean pick;
 	
 	private int score;
+	
+	private int currentChord;
 	
 	private Synthesizer synth;
 	private MidiChannel[] mc;
@@ -62,18 +65,12 @@ public class MainWindow extends Game {
 		super(w, h);
 		
 		gui = new GUIManager();
-		btnTest = new Button("Test");
-		btnTest.setBounds(0, 0, 50, 25);
-		btnTest.setGUIListener(new GUIListener() {
-			public void call() {
-				System.out.println("Click!");
-			}
-		});
-		gui.add(btnTest);
-		txtTest = new TextBox();
-		txtTest.setBounds(0, 100, 100, 25);
-		txtTest.setLimit(10);
-		gui.add(txtTest);
+		
+		chords = new ChordButtonHandler(144, 144+64+32, 144+2*(64+32), 144+3*(64+32));
+		chords.setMaxHeight(h);
+		chords.addChord(15);
+		
+		currentChord = 7;
 		
 		fingers = new Finger[4];
 		for(int i=0; i<fingers.length; i++) {
@@ -115,21 +112,36 @@ public class MainWindow extends Game {
 		// Show fretboard
 		fretboard.show(g2d);
 		
+		chords.draw(g2d);
+		
 		for(Finger f: fingers) {
 			f.draw(g2d);
 		}
+		
+		g2d.setColor(Color.white);
+		g2d.drawString("Score: " + score, 0, g2d.getFontMetrics().getHeight()+2);
 		
 		gui.draw(g2d);
 	}
 
 	@Override
+	public void loop() {
+		chords.handle();
+		
+		for(int i=0; i<fingers.length; i++) {
+			chords.getButton(i).setPressed(false);
+			
+			if(fingers[i].isPressed()) {
+				if(fingers[i].getRect().intersects(chords.getButton(i).getRect())) {
+					chords.getButton(i).setPressed(true);
+				}
+			}
+		}
+	}
+	
+	@Override
 	public void keyTyped(KeyEvent arg0) {
 		gui.handle(arg0);
-	}
-
-	@Override
-	public void loop() {
-		
 	}
 
 	@Override
@@ -175,12 +187,33 @@ public class MainWindow extends Game {
 	@Override
 	public void keyDown(int keyID) {
 		switch(keyID) {
-			case KeyEvent.VK_ENTER: pick = true; break;
-		
 			case KeyEvent.VK_1: fingers[0].setPressed(true); break;
 			case KeyEvent.VK_2: fingers[1].setPressed(true); break;
 			case KeyEvent.VK_3: fingers[2].setPressed(true); break;
 			case KeyEvent.VK_4: fingers[3].setPressed(true); break;
+			
+			case KeyEvent.VK_ENTER: 
+				if(pick == false && currentChord != 0) {
+					int pattern = 0;
+					if(fingers[0].isPressed()) {
+						pattern+=1;
+					}
+					if(fingers[1].isPressed()) {
+						pattern+=2;
+					}
+					if(fingers[2].isPressed()) {
+						pattern+=4;
+					}
+					if(fingers[3].isPressed()) {
+						pattern+=8;
+					}
+					if(currentChord == pattern) {
+						score++;
+						currentChord = 0;
+					}
+				}
+				pick = true; 
+				break;
 		}
 	}
 

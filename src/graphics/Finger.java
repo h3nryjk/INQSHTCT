@@ -2,6 +2,7 @@ package graphics;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public class Finger {
 	private int x;
@@ -25,6 +26,14 @@ public class Finger {
 	
 	public void setPressed(boolean pressed) {
 		this.pressed = pressed;
+	}
+	
+	public boolean isPressed() {
+		return pressed;
+	}
+	
+	public Rectangle getRect() {
+		return new Rectangle(x, y, w, h);
 	}
 	
 	public void draw(Graphics g) {
