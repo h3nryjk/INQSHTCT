@@ -68,7 +68,7 @@ public class MainWindow extends Game {
 		
 		chords = new ChordButtonHandler(144, 144+64+32, 144+2*(64+32), 144+3*(64+32));
 		chords.setMaxHeight(h);
-		chords.addChord(15);
+		chords.addChord(5);
 		
 		currentChord = 7;
 		
@@ -128,12 +128,14 @@ public class MainWindow extends Game {
 	public void loop() {
 		chords.handle();
 		
-		for(int i=0; i<fingers.length; i++) {
-			chords.getButton(i).setPressed(false);
-			
-			if(fingers[i].isPressed()) {
-				if(fingers[i].getRect().intersects(chords.getButton(i).getRect())) {
-					chords.getButton(i).setPressed(true);
+		if(chords.size() > 0) {
+			for(int i=0; i<fingers.length; i++) {
+				chords.getCurrentButton(i).setPressed(false);
+				
+				if(fingers[i].isPressed()) {
+					if(fingers[i].getRect().intersects(chords.getCurrentButton(i).getRect())) {
+						chords.getCurrentButton(i).setPressed(true);
+					}
 				}
 			}
 		}
@@ -196,16 +198,16 @@ public class MainWindow extends Game {
 				if(pick == false && currentChord != 0) {
 					int pattern = 0;
 					if(fingers[0].isPressed()) {
-						pattern+=1;
+						pattern|=1;
 					}
 					if(fingers[1].isPressed()) {
-						pattern+=2;
+						pattern|=2;
 					}
 					if(fingers[2].isPressed()) {
-						pattern+=4;
+						pattern|=4;
 					}
 					if(fingers[3].isPressed()) {
-						pattern+=8;
+						pattern|=8;
 					}
 					if(currentChord == pattern) {
 						score++;

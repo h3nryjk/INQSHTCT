@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 public class ChordButtonHandler {
-	private ArrayList<ChordButton> buttons;
+	private ArrayList<ChordArray> buttons;
 	private int maxHeight;
 	
 	private int x1, x2, x3, x4;
@@ -16,27 +16,25 @@ public class ChordButtonHandler {
 		this.x3 = x3;
 		this.x4 = x4;
 		
-		buttons = new ArrayList<ChordButton>();
+		buttons = new ArrayList<ChordArray>();
+		
 		maxHeight = 600;
 	}
 	
 	public void addChord(int pattern) {
-		if((pattern & 1) > 0) {
-			buttons.add(new ChordButton(new Color(200, 200, 125), new Color(150, 150, 100), x1, 64, 64));
-		}
-		if((pattern & 2) > 0) {
-			buttons.add(new ChordButton(new Color(200, 125, 200), new Color(150, 100, 150), x2, 64, 64));
-		}
-		if((pattern & 4) > 0) {
-			buttons.add(new ChordButton(new Color(125, 200, 200), new Color(100, 150, 150), x3, 64, 64));
-		}
-		if((pattern & 8) > 0) {
-			buttons.add(new ChordButton(new Color(125, 200, 125), new Color(100, 125, 100), x4, 64, 64));
-		}
+		buttons.add(new ChordArray(pattern, x1, x2, x3, x4));
 	}
 	
-	public ChordButton getButton(int index) {
-		return buttons.get(index);
+	public ChordButton getCurrentButton(int index) {
+		return buttons.get(0).getButton(index);
+	}
+	
+	public ChordArray getCurrentArray() {
+		return buttons.get(0);
+	}
+	
+	public int size() {
+		return buttons.size();
 	}
 	
 	public void setMaxHeight(int maxHeight) {
@@ -53,7 +51,7 @@ public class ChordButtonHandler {
 	}
 	
 	public void draw(Graphics g) {
-		for(ChordButton button: buttons) {
+		for(ChordArray button: buttons) {
 			button.draw(g);
 		}
 	}
