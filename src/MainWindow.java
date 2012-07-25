@@ -68,7 +68,7 @@ public class MainWindow extends Game {
 		
 		chords = new ChordButtonHandler(144, 144+64+32, 144+2*(64+32), 144+3*(64+32));
 		chords.setMaxHeight(h);
-		chords.addChord(5);
+		chords.addChord(15);
 		
 		currentChord = 7;
 		
