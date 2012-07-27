@@ -3,6 +3,8 @@ package graphics;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import midi.Chord;
+
 public class ChordArray {
 	private int pattern;
 	private int y;
@@ -23,6 +25,10 @@ public class ChordArray {
 		for(ChordButton b: buttons) {
 			b.setY(y);
 		}
+	}
+	
+	public void parseChord(Chord c) {
+		
 	}
 	
 	public ChordButton getButton(int index) {

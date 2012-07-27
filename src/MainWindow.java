@@ -21,10 +21,12 @@ import javax.sound.midi.Synthesizer;
 
 import midi.MidiInterface;
 import midi.Note;
+import midi.Track;
 
 import sprite.Sprite;
 
 import game.Game;
+import generation.TrackGenerator;
 import graphics.ChordButtonHandler;
 import graphics.Finger;
 import graphics.Fretboard;
@@ -51,6 +53,8 @@ public class MainWindow extends Game {
 	private int currentChord;
 	
 	private MidiInterface midi;
+	private Track melody;
+	private Track percussion;
 	
 	private Random random;
 	
@@ -64,6 +68,21 @@ public class MainWindow extends Game {
 		super(w, h);
 		
 		midi = new MidiInterface();
+		
+		midi.setInstrument(29, 0);
+		melody = new Track(midi);
+		melody.setChannel(0);
+		melody.setVelocity(100);
+		
+		percussion = new Track(midi);
+		percussion.setChannel(9);
+		percussion.setVelocity(75);
+		
+		TrackGenerator mgen = new TrackGenerator(new Random(), 30, Note.A, 12);
+		melody = mgen.generate(midi);
+		
+		TrackGenerator pgen = new TrackGenerator(new Random(), 110, 35, 12);
+		percussion = pgen.generate(midi);
 		
 		gui = new GUIManager();
 		
@@ -110,8 +129,9 @@ public class MainWindow extends Game {
 
 	@Override
 	public void loop() {
-		midi.setInstrument(29, 0);
-		midi.playNote(new Note(Note.C, 2), 0, 100);
+		melody.play();
+		
+		percussion.play();
 		
 		chords.handle();
 		

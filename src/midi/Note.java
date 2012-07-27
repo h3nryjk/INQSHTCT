@@ -19,6 +19,10 @@ public class Note {
 	private int code = C;
 	private int length = 100;
 	
+	public Note(int code) {
+		this.code = code;
+	}
+	
 	public Note(int code, int octave) {
 		this.code = code + octave * 12;
 	}

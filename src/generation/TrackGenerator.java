@@ -2,6 +2,11 @@ package generation;
 
 import java.util.Random;
 
+import midi.Chord;
+import midi.MidiInterface;
+import midi.Note;
+import midi.Track;
+
 import ca.CellularAutomaton;
 
 public class TrackGenerator {
@@ -21,11 +26,21 @@ public class TrackGenerator {
 		}
 		
 		ca = new CellularAutomaton(rule, 64, 64, (long)(generator.nextDouble()*Math.pow(2, 64)));
+		ca.erase(3);
+		ca.erase(6);
+		ca.erase(7);
+	}
+	
+	public Track generate(MidiInterface midi) {
+		Track t = new Track(midi);
 		
 		for(int i=0; i<64; i++) {
 			boolean row[] = ca.getRow(i);
-			
-			//track.add(row);
+			Chord c = new Chord();
+			c.set(Note.A, 8, 8, row);
+			t.addChord(c);
 		}
+		
+		return t;
 	}
 }
