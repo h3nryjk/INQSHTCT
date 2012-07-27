@@ -83,6 +83,19 @@ public class CellularAutomaton {
 		}
 	}
 	
+	public boolean[] getRow(int index) {
+		boolean row[] = new boolean[width];
+		for(int x=0; x<width; x++) {
+			if(index < height) {
+				row[x] = cells[x][index];
+			}
+			else {
+				row[x] = false;
+			}
+		}
+		return row;
+	}
+	
 	public void show(Graphics g, int x, int y, int zoom) {
 		for(int i=0; i<8; i++) {
 			for(int j=0; j<height; j++) {

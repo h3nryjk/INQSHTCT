@@ -21,5 +21,11 @@ public class TrackGenerator {
 		}
 		
 		ca = new CellularAutomaton(rule, 64, 64, (long)(generator.nextDouble()*Math.pow(2, 64)));
+		
+		for(int i=0; i<64; i++) {
+			boolean row[] = ca.getRow(i);
+			
+			//track.add(row);
+		}
 	}
 }

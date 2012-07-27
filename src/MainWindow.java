@@ -19,6 +19,9 @@ import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Soundbank;
 import javax.sound.midi.Synthesizer;
 
+import midi.MidiInterface;
+import midi.Note;
+
 import sprite.Sprite;
 
 import game.Game;
@@ -47,11 +50,7 @@ public class MainWindow extends Game {
 	
 	private int currentChord;
 	
-	private Synthesizer synth;
-	private MidiChannel[] mc;
-	private ShortMessage myMsg;
-	private Soundbank soundbank;
-	private Instrument[] instr;
+	private MidiInterface midi;
 	
 	private Random random;
 	
@@ -63,6 +62,8 @@ public class MainWindow extends Game {
 	
 	public MainWindow(int w, int h) {
 		super(w, h);
+		
+		midi = new MidiInterface();
 		
 		gui = new GUIManager();
 		
@@ -83,23 +84,6 @@ public class MainWindow extends Game {
 		
 		random = new Random();
 		random.setSeed(1283761234);
-
-		try {
-			synth = MidiSystem.getSynthesizer();
-			synth.open();
-			myMsg = new ShortMessage();
-			soundbank = synth.getDefaultSoundbank();
-			instr = soundbank.getInstruments();
-			
-			int i=29;
-			
-			synth.loadInstrument(instr[i]);
-			
-			mc = synth.getChannels();
-			mc[c].programChange(instr[i].getPatch().getProgram());
-		} catch (MidiUnavailableException e) {
-			e.printStackTrace();
-		}
 	}
 
 	@Override
@@ -126,6 +110,9 @@ public class MainWindow extends Game {
 
 	@Override
 	public void loop() {
+		midi.setInstrument(29, 0);
+		midi.playNote(new Note(Note.C, 2), 0, 100);
+		
 		chords.handle();
 		
 		if(chords.size() > 0) {
