@@ -13,6 +13,7 @@ public class MidiInterface {
 		try {
 			synthesizer = MidiSystem.getSynthesizer();
 			synthesizer.open();
+			synthesizer.loadAllInstruments(synthesizer.getDefaultSoundbank());
 		} catch (MidiUnavailableException e) {
 			e.printStackTrace();
 		}

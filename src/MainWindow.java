@@ -70,19 +70,17 @@ public class MainWindow extends Game {
 		midi = new MidiInterface();
 		
 		midi.setInstrument(29, 0);
-		melody = new Track(midi);
-		melody.setChannel(0);
+		melody = new Track(midi, 0);
 		melody.setVelocity(100);
 		
-		percussion = new Track(midi);
-		percussion.setChannel(9);
+		percussion = new Track(midi, 9);
 		percussion.setVelocity(75);
 		
 		TrackGenerator mgen = new TrackGenerator(new Random(), 30, Note.A, 12);
-		melody = mgen.generate(midi);
+		melody = mgen.generate(midi, 0);
 		
-		TrackGenerator pgen = new TrackGenerator(new Random(), 110, 35, 12);
-		percussion = pgen.generate(midi);
+		TrackGenerator pgen = new TrackGenerator(new Random(), 30, Note.A, 12);
+		percussion = pgen.generate(midi, 9);
 		
 		gui = new GUIManager();
 		

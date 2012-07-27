@@ -31,8 +31,8 @@ public class TrackGenerator {
 		ca.erase(7);
 	}
 	
-	public Track generate(MidiInterface midi) {
-		Track t = new Track(midi);
+	public Track generate(MidiInterface midi, int channel) {
+		Track t = new Track(midi, channel);
 		
 		for(int i=0; i<64; i++) {
 			boolean row[] = ca.getRow(i);

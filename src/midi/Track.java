@@ -16,11 +16,11 @@ public class Track {
 	private int delay;
 	private Timer timer;
 	
-	public Track(MidiInterface midi) {
+	public Track(MidiInterface midi, int channel) {
 		chords = new ArrayList<Chord>();
 		this.midi = midi;
 		this.velocity = 100;
-		this.channel = 0;
+		this.channel = channel;
 		this.delay = 500;
 		timer = new Timer();
 		timer.start(delay);
@@ -30,13 +30,8 @@ public class Track {
 		this.velocity = velocity;
 	}
 	
-	public void setChannel(int channel) {
-		this.channel = channel;
-	}
-	
 	public void addChord(Chord c) {
 		chords.add(c);
-		System.out.println("add " + chords.size());
 	}
 	
 	public Chord getChord(int index) {
@@ -56,13 +51,17 @@ public class Track {
 	}
 	
 	public void play() {
-		if(!chords.isEmpty() && timer.done()) {
+		if(!chords.isEmpty()) {
+			if(timer.done()) {
+				midi.getChannel(channel).allNotesOff();
+				
+				currentChord = chords.get(0);
+				chords.remove(0);
+				currentChord.play(midi, channel, velocity);
+				timer.start(delay);
+			}
+		} else {
 			midi.getChannel(channel).allNotesOff();
-			
-			currentChord = chords.get(0);
-			chords.remove(0);
-			currentChord.play(midi, channel, velocity);
-			timer.start(delay);
 		}
 	}
 }
