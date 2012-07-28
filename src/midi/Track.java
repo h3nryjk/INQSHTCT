@@ -16,12 +16,12 @@ public class Track {
 	private int delay;
 	private Timer timer;
 	
-	public Track(MidiInterface midi, int channel) {
+	public Track(MidiInterface midi, int channel, int delay) {
 		chords = new ArrayList<Chord>();
 		this.midi = midi;
 		this.velocity = 100;
 		this.channel = channel;
-		this.delay = 500;
+		this.delay = delay;
 		timer = new Timer();
 		timer.start(delay);
 	}

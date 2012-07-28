@@ -25,22 +25,31 @@ public class TrackGenerator {
 			range = 64;
 		}
 		
-		ca = new CellularAutomaton(rule, 64, 64, (long)(generator.nextDouble()*Math.pow(2, 64)));
+		long seed = 0;
+		do {
+			seed = (long)(generator.nextLong());
+		} while(seed == 0);
+		ca = new CellularAutomaton(rule, 64, 64, seed);
+		System.out.println(seed);
 		ca.erase(3);
 		ca.erase(6);
 		ca.erase(7);
 	}
 	
-	public Track generate(MidiInterface midi, int channel) {
-		Track t = new Track(midi, channel);
+	public Track generate(Track track) {
+		Track t = track;
 		
 		for(int i=0; i<64; i++) {
 			boolean row[] = ca.getRow(i);
 			Chord c = new Chord();
-			c.set(Note.A, 8, 8, row);
+			c.set(Note.A, 12, 8, row);
 			t.addChord(c);
 		}
 		
 		return t;
+	}
+	
+	public CellularAutomaton getCA() {
+		return ca;
 	}
 }

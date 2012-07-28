@@ -1,5 +1,6 @@
 package ca;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class CellularAutomaton {
@@ -97,7 +98,17 @@ public class CellularAutomaton {
 	}
 	
 	public void show(Graphics g, int x, int y, int zoom) {
-		for(int i=0; i<8; i++) {
+		for(int i=0; i<width; i++) {
+			for(int j=0; j<height; j++) {
+				if(cells[i][j]==true) {
+					g.fillRect(x+i*zoom, y+j*zoom, zoom, zoom);
+				}
+			}
+		}
+	}
+	
+	public void showArea(Graphics g, int x, int y, int offset, int width, int zoom) {
+		for(int i=offset; i<width; i++) {
 			for(int j=0; j<height; j++) {
 				if(cells[i][j]==true) {
 					g.fillRect(x+i*zoom, y+j*zoom, zoom, zoom);

@@ -55,8 +55,12 @@ public class MainWindow extends Game {
 	private MidiInterface midi;
 	private Track melody;
 	private Track percussion;
+	private TrackGenerator mgen;
+	private TrackGenerator pgen;
+	
 	
 	private Random random;
+	private long seed;
 	
 	int red = 125;
 	int green = 125;
@@ -67,20 +71,25 @@ public class MainWindow extends Game {
 	public MainWindow(int w, int h) {
 		super(w, h);
 		
+		random = new Random();
+		seed = System.currentTimeMillis();
+		random.setSeed(seed);
+		
 		midi = new MidiInterface();
 		
 		midi.setInstrument(29, 0);
-		melody = new Track(midi, 0);
+		melody = new Track(midi, 0, 500);
 		melody.setVelocity(100);
 		
-		percussion = new Track(midi, 9);
+		percussion = new Track(midi, 9, 250);
 		percussion.setVelocity(75);
 		
-		TrackGenerator mgen = new TrackGenerator(new Random(), 30, Note.A, 12);
-		melody = mgen.generate(midi, 0);
+		mgen = new TrackGenerator(random, 150, Note.A, 12);
+		melody = mgen.generate(melody);
 		
-		TrackGenerator pgen = new TrackGenerator(new Random(), 30, Note.A, 12);
-		percussion = pgen.generate(midi, 9);
+		pgen = new TrackGenerator(random, 150, Note.A, 12);
+		percussion = pgen.generate(percussion);
+		percussion = pgen.generate(percussion);
 		
 		gui = new GUIManager();
 		
@@ -98,9 +107,6 @@ public class MainWindow extends Game {
 		fretboard = new Fretboard(50, 0, w-100, w-400, h);
 		
 		pick = false;
-		
-		random = new Random();
-		random.setSeed(1283761234);
 	}
 
 	@Override
@@ -121,6 +127,12 @@ public class MainWindow extends Game {
 		
 		g2d.setColor(Color.white);
 		g2d.drawString("Score: " + score, 0, g2d.getFontMetrics().getHeight()+2);
+		g2d.drawString("Seed: " + seed, 0, 2*(g2d.getFontMetrics().getHeight()+2));
+		
+		g2d.setColor(Color.black);
+		mgen.getCA().show(g, 640-64, 0, 1);
+		g2d.setColor(Color.red);
+		mgen.getCA().showArea(g, 640-64, 0, 12, 0, 1);
 		
 		gui.draw(g2d);
 	}
